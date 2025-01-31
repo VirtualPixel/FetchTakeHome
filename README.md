@@ -1,24 +1,27 @@
 ### Summary: Include screen shots or a video of your app highlighting its features
-// VIDEO LINK GOES HERE 
+Feature Overview - [YouTube Video](https://youtu.be/nLRhKFkjFeU)
+
 I built a SwiftUI recipe browser that displays recipes grouped by cuisine type, with image caching and external links to source recipes and YouTube videos when available. The app features comprehensive error handling, VoiceOver support, and pull to refresh functionality.
 
 ### Focus Areas: What specific areas of the project did you prioritize? Why did you choose to focus on these areas?
-* UI/UX Design: With my design background, I prioritized creating an intuitive and polished user experience. I ensured to handle edge cases in UI like missing or malformed data while adhering to requirements. 
-* I had an accessibility focus, ensuring I implemented VoiceOver support. All recipes include labels and hints.
-* I ensured to use the MVVM pattern, as well as modern Swift features like actors for maintainable code. 
+* Implemented actor-based image caching for thread safety
+* Built responsive UI with SwiftUI and MVVM architecture
+* Added comprehensive VoiceOver support with custom labels and hints
 
 ### Time Spent: Approximately how long did you spend working on this project? How did you allocate your time?
-I started this project at 4pm on January 30th, finished the coding of it in about 6 hours. This is not including the time spent on 1/30 for recording the walkthrough.
-* Reading through the requirements, information, and structure of the data
-* Planning out the architecture of the application
-* Setting up the project structure, implementing the main features
-* Building out the UI while handling possible edge cases
-* Writing tests and documentation
+6 hours of development time on January 30th, plus additional time for video walkthrough. Time was allocated across:
+* Requirements analysis and architecture planning
+* Core implementation and UI development 
+* Testing and documentation
 
 ### Trade-offs and Decisions: Did you make any significant trade-offs in your approach?
 * Recipe Model: I used wrapper variables for optional URLs instead of a custom decoder. In production, I'd write a custom decoding function to map variables directly to their final types.
 * API Configuration: I put the API URLs in an enum for simple testing. In a real app, I'd use environment-specific configuration files for each target.
-* Image caching: I implemented basic memory and disk caching without size limits/cleanup functions. Given more time, these would have been added to prevent excessive usage.
+* Image caching: Basic memory/disk caching implemented without:
+  - Cache size limits
+  - Cleanup policies
+  - File expiration
+  - Memory pressure handling
 * iOS Support: I chose to target iOS 16 to align with Fetch's requirements
 
 ### Weakest Part of the Project: What do you think is the weakest part of your project?
