@@ -56,19 +56,24 @@ enum APIError: Error {
 }
 
 class APIManager {
+    
     static func getRecipeList(recipeUrl: APIEndpoint = .recipeUrl) async throws -> [Recipe] {
         guard let url = recipeUrl.url else {
             throw APIError.invalidURL
         }
         
         do {
-            let (data, response) = try await URLSession.shared.data(from: url)
+            let config = URLSessionConfiguration.default
+            config.requestCachePolicy = .reloadIgnoringLocalCacheData
+            let session = URLSession(configuration: config)
             
+            let (data, response) = try await session.data(from: url)
+                        
             guard let httpResponse = response as? HTTPURLResponse,
                   (200...299).contains(httpResponse.statusCode) else {
                 throw APIError.serverError
             }
-            
+                        
             let decodedResponse = try JSONDecoder().decode(RecipeResponse.self, from: data)
             return decodedResponse.recipes
         } catch {

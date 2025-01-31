@@ -46,8 +46,9 @@ class RecipeListViewModel: ObservableObject {
     
     @Sendable func downloadRecipes() async {
         do {
-            try? await Task.sleep(nanoseconds: refreshDelay)
+            try await Task.sleep(nanoseconds: refreshDelay)
             let recipes = try await APIManager.getRecipeList()
+            
             groupedRecipes = Dictionary(grouping: recipes) { $0.cuisine }
                 .sorted(by: { $0.key < $1.key })
                 .reduce(into: [:]) { dict, tuple in
